@@ -15,17 +15,21 @@ func main() {
 
 	// Add some routes. For now, they
 	// will just write messages to the console
-	r.HandleFunc("/", func() {
+	r.HandleFunc("/", func(id ...int) {
 		print("At home page!")
 		jq("#current-page").SetHtml("Home Page")
 	})
-	r.HandleFunc("/about", func() {
+	r.HandleFunc("/about", func(id ...int) {
 		print("At about page!")
 		jq("#current-page").SetHtml("About Page")
 	})
-	r.HandleFunc("/faq", func() {
+	r.HandleFunc("/faq", func(id ...int) {
 		print("At faq page!")
 		jq("#current-page").SetHtml("FAQ Page")
+	})
+	r.HandleFunc("/post/:id", func(id ...int) {
+		print("At Post Page for Post: ", id[0])
+		jq("#current-page").SetHtml("Post Page")
 	})
 
 	r.Start()
